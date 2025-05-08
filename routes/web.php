@@ -37,6 +37,12 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::delete('/driver/delete/{id}', [DriverController::class, 'destroy'])->name('deleteDriver');
 
     Route::get('/absen', [AbsenController::class,'index'])->name('absen');
+    Route::get('/absen/create', [AbsenController::class, 'create'])->name('createAbsen');
+    Route::post('/absen/store', [AbsenController::class, 'store'])->name('storeAbsen');
+    Route::get('/absen/edit/{id}', [AbsenController::class,'show'])->name('showAbsen');
+    Route::put('/absen/update/{id}', [AbsenController::class,'update'])->name('updateAbsen');
+    Route::delete('/absen/delete/{id}', [AbsenController::class,'destroy'])->name('deleteAbsen');
+
     Route::get('/pengantaran', [PengantaranController::class,'index'])->name('pengantaran');
     Route::get('/gaji', [GajiController::class,'index'])->name('gaji');
     Route::get('/history', [HistoryController::class,'index'])->name('history');

@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Driver::class);
     }
+
+    public function absen()
+    {
+        return $this->hasMany(Absen::class);
+    }
 }

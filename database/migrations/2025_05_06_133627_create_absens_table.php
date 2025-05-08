@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('absens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->OnDelete('cascade');
             $table->date('tanggal');
             $table->time('jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
-            $table->enum('status', ['Masuk', 'Tidak Masuk', 'Izin'])->default('Masuk');
+            $table->string('status');
             $table->timestamps();
         });
     }
