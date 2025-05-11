@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header">
             <div>
-                <a href="#" class="btn btn-sm btn-primary">
+                <a href="{{ route('createPengantaran') }}" class="btn btn-sm btn-primary">
                     <i class="fas fa-plus mr-2"></i>
                     Tambah Data
                 </a>
@@ -20,7 +20,6 @@
                             <th>Nama Pemesan</th>
                             <th>No.Telp</th>
                             <th>Alamat</th>
-                            <th>Ket.Ongkir</th>
                             <th>Status</th>
                             <th>
                                 <i class="fas fa-cog"></i>
@@ -28,22 +27,58 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($pengantarans as $pengantaran)
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>08.00</td>
-                            <td>04.00</td>
-                            <td>0293298329</td>
-                            <td>Gg.Berkah</td>
-                            <td>10rb</td>
+                            <td>{{ $pengantaran->users->name }}</td>
                             <td>
-                                <span class="badge badge-success badge-pill">SELSAI</span>
+                                <span class="badge badge-info badge-pill">{{ $pengantaran->tanggal }}</span>
                             </td>
+                            <td class="text-center">{{ $pengantaran->nama_pemesan }}</td>
+                            <td>{{ $pengantaran->no_telepon }}</td>
+                            <td>{{ $pengantaran->alamat }}</td>
+
+                            <td class="text-center">
+                                    @if ($pengantaran->status === 'Menunggu')
+                                        <span class="badge badge-warning badge-pill">{{ $pengantaran->status }}</span>
+                                    @elseif ($pengantaran->status === 'Selesai')
+                                        <span class="badge badge-success badge-pill">{{ $pengantaran->status }}</span>
+                                    @endif
+                                </td>
 
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                                <a href="{{ route('showPengantaran', $pengantaran->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $pengantaran->id }}">
+                                        Hapus
+                                    </button>
+                                    <!-- Modal Hapus -->
+                                <div class="modal fade" id="modalDelete{{ $pengantaran->id }}" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel{{ $pengantaran->id }}" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger text-white">
+                                                <h5 class="modal-title">Hapus Data pengantaran?</h5>
+                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Nama Driver: <strong>{{ $pengantaran->users->name }}</strong></p>
+                                                <p>Nama Penerima: <strong>{{ $pengantaran->nama_pemesan }}</strong></p>
+                                                <p>Alamat: <strong>{{ $pengantaran->alamat }}</strong></p>
+                                                <p>Status: <strong>{{ $pengantaran->status }}</strong></p>
+                                                <p>Tanggal: <strong>{{ $pengantaran->tanggal }}</strong></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="{{ route('deletePengantaran', $pengantaran->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

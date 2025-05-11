@@ -9,6 +9,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\KasController;
 use App\Http\Controllers\PengantaranController;
 use App\Http\Controllers\UserController;
+use App\Models\Pengantaran;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -22,6 +23,8 @@ Route::get('/logout', [AuthController::class,'logout'])->name('logout');
 
 Route::middleware(['checkLogin'])->group(function() {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+
+
     Route::get('/user', [UserController::class,'index'])->name('user');
     Route::get('/user/create', [UserController::class,'create'])->name('createUser');
     Route::post('/user/store', [UserController::class,'store'])->name('storeUser');
@@ -43,7 +46,13 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::put('/absen/update/{id}', [AbsenController::class,'update'])->name('updateAbsen');
     Route::delete('/absen/delete/{id}', [AbsenController::class,'destroy'])->name('deleteAbsen');
 
-    Route::get('/pengantaran', [PengantaranController::class,'index'])->name('pengantaran');
+    Route::get('/pengantaran', [PengantaranController::class, 'index'])->name('pengantaran');
+    Route::get('/pengantaran/create', [PengantaranController::class, 'create'])->name('createPengantaran');
+    Route::post('/pengantarn/store', [PengantaranController::class, 'store'])->name('storePengantaran');
+    Route::get('/pengantaran/edit/{id}', [PengantaranController::class,'show'])->name('showPengantaran');
+    Route::put('/pengantaran/update/{id}', [PengantaranController::class,'update'])->name('updatePengantaran');
+    Route::delete('/pengantaran/delete/{id}', [PengantaranController::class,'destroy'])->name('deletePengantaran');
+
     Route::get('/gaji', [GajiController::class,'index'])->name('gaji');
     Route::get('/history', [HistoryController::class,'index'])->name('history');
     Route::get('/kas', [KasController::class,'index'])->name('kas');

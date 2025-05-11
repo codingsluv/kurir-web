@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengantarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('nama_pemesan');
             $table->string('no_telepon');
             $table->enum('status', ['Selesai', 'Menunggu'])->default('Menunggu');
