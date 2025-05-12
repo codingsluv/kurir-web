@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('gajis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('bulan'); // format: '2025-04'
             $table->integer('jumlah_pengantaran'); // jumlah pengantaran yang dilakukan driver di bulan ini
             $table->decimal('total_ongkir', 15, 2); // dari total biaya_tambahan bulan itu
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('pendapatan_aplikasi', 15, 2); // 30% dari total_ongkir
             $table->timestamps();
 
-            $table->unique(['driver_id', 'bulan']); // Biar tidak dobel entry untuk bulan yang sama
+            $table->unique(['user_id', 'bulan']); // Biar tidak dobel entry untuk bulan yang sama
         });
     }
 

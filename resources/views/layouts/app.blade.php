@@ -32,99 +32,104 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon">
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">Kurir</div>
-            </a>
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-shipping-fast"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Kurir</div>
+    </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ $menuDashboard ?? '' }}">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item {{ $menuDashboard ?? '' }}">
+        <a class="nav-link" href="/dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
 
-            <hr class="sidebar-divider">
+    <hr class="sidebar-divider">
 
-            <div class="sidebar-heading">
-                Menu Admin
-            </div>
+    <!-- Menu Admin -->
+    @if(auth()->user()->role == 'Admin') <!-- Periksa jika role adalah admin -->
+        <div class="sidebar-heading">
+            Menu Admin
+        </div>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item {{ $activeUser ?? '' }}" >
-                <a class="nav-link" href="{{ route('user') }}">
-                    <i class="fas fa-user"></i>
-                    <span>User</span></a>
-            </li>
+        <!-- Nav Item - User -->
+        <li class="nav-item {{ $activeUser ?? '' }}">
+            <a class="nav-link" href="{{ route('user') }}">
+                <i class="fas fa-user"></i>
+                <span>User</span></a>
+        </li>
 
-            <li class="nav-item {{ $activeDriver ?? '' }}" >
-                <a class="nav-link" href="{{ route('driver') }}">
-                    <i class="fas fa-users"></i>
-                    <span>Driver</span></a>
-            </li>
+        <!-- Nav Item - Driver -->
+        <li class="nav-item {{ $activeDriver ?? '' }}">
+            <a class="nav-link" href="{{ route('driver') }}">
+                <i class="fas fa-users"></i>
+                <span>Driver</span></a>
+        </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item {{ $activeAbsen ?? '' }}">
-                <a class="nav-link" href="{{ route('absen') }}">
-                    <i class="fas fa-user-check"></i>
-                    <span>Absen</span></a>
-            </li>
-            <li class="nav-item {{ $activePengantaran ?? '' }}">
-                <a class="nav-link" href="{{ route('pengantaran') }}">
-                    <i class="fas fa-motorcycle"></i>
-                    <span>Pengantaran</span></a>
-            </li>
-            <li class="nav-item {{ $activeGaji ?? '' }}">
-                <a class="nav-link" href="{{ route('gaji') }}">
-                    <i class="fas fa-money-check-alt"></i>
-                    <span>Gaji Driver</span></a>
-            </li>
-            <li class="nav-item {{ $activeHistory ?? '' }}">
-                <a class="nav-link" href="{{ route('history') }}">
-                    <i class="fas fa-history"></i>
-                    <span>History</span></a>
-            </li>
-            <li class="nav-item {{ $activeKas ?? '' }}">
-                <a class="nav-link" href="kas">
-                    <i class="fab fa-cc-mastercard"></i>
-                    <span>Kas</span></a>
-            </li>
+        <!-- Nav Item - Absen -->
+        <li class="nav-item {{ $activeAbsen ?? '' }}">
+            <a class="nav-link" href="{{ route('absen') }}">
+                <i class="fas fa-user-check"></i>
+                <span>Absen</span></a>
+        </li>
+        <li class="nav-item {{ $activePengantaran ?? '' }}">
+            <a class="nav-link" href="{{ route('pengantaran') }}">
+                <i class="fas fa-motorcycle"></i>
+                <span>Pengantaran</span></a>
+        </li>
+        <li class="nav-item {{ $activeGaji ?? '' }}">
+            <a class="nav-link" href="{{ route('gaji') }}">
+                <i class="fas fa-money-check-alt"></i>
+                <span>Gaji Driver</span></a>
+        </li>
+        <li class="nav-item {{ $activeHistory ?? '' }}">
+            <a class="nav-link" href="{{ route('history') }}">
+                <i class="fas fa-history"></i>
+                <span>History</span></a>
+        </li>
+        <li class="nav-item {{ $activeKas ?? '' }}">
+            <a class="nav-link" href="kas">
+                <i class="fab fa-cc-mastercard"></i>
+                <span>Kas</span></a>
+        </li>
+    @endif
 
-            <hr class="sidebar-divider">
+    <hr class="sidebar-divider">
 
-            <div class="sidebar-heading">
-                Menu Driver
-            </div>
+    <!-- Menu Driver -->
+    @if(auth()->user()->role == 'Driver') <!-- Periksa jika role adalah driver -->
+        <div class="sidebar-heading">
+            Menu Driver
+        </div>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-truck-loading"></i>
-                    <span>Orderan Masuk</span></a>
-            </li>
+        <!-- Nav Item - Orderan Masuk -->
+        <li class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-truck-loading"></i>
+                <span>Orderan Masuk</span></a>
+        </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-money-check-alt"></i>
-                    <span>Gaji Driver</span></a>
-            </li>
+        <!-- Nav Item - Gaji Driver -->
+        <li class="nav-item {{ $activeGaji ?? '' }}">
+            <a class="nav-link" href="{{ route('gaji') }}">
+                <i class="fas fa-money-check-alt"></i>
+                <span>Gaji Driver</span></a>
+        </li>
+    @endif
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+    <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 
-        </ul>
+</ul>
+
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->

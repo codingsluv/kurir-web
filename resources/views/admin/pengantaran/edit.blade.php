@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="form-label">
                             <span class="text-danger">*</span> No.Telp:
                         </label>
@@ -57,7 +57,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label class="form-label">
                             <span class="text-danger">*</span> Status:
                         </label>
@@ -68,6 +68,15 @@
                         </select>
                         @error('status')
                             <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label for="ongkir" class="form-label">
+                            Ongkos Kirim (Rp):
+                        </label>
+                        <input type="number" step="0.01" name="ongkir" id="ongkir" class="form-control @error('ongkir') is-invalid @enderror" value="{{ $pengantaran->ongkir }}">
+                        @error('ongkir')
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-12">

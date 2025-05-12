@@ -13,6 +13,7 @@ class Pengantaran extends Model
         'status',
         'tanggal',
         'alamat',
+        'ongkir',
         'catatan',
     ];
 

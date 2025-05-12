@@ -61,4 +61,9 @@ class User extends Authenticatable
     public function pengantaran(){
         return $this->hasMany(Pengantaran::class);
     }
+
+    public function gajis()
+    {
+        return $this->hasMany(Gaji::class);
+    }
 }

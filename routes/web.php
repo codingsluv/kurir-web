@@ -54,6 +54,12 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::delete('/pengantaran/delete/{id}', [PengantaranController::class,'destroy'])->name('deletePengantaran');
 
     Route::get('/gaji', [GajiController::class,'index'])->name('gaji');
+    Route::get('/gaji/create', [GajiController::class,'create'])->name('createGaji');
+    Route::post('/gaji/store', [GajiController::class,'store'])->name('storeGaji');
+    Route::get('/gaji/edit/{id}', [GajiController::class,'edit'])->name('showGaji');
+    Route::put('/gaji/update/{id}', [GajiController::class,'update'])->name('updateGaji');
+    Route::delete('/gaji/delete/{id}', [GajiController::class, 'destroy'])->name('deleteGaji');
+
     Route::get('/history', [HistoryController::class,'index'])->name('history');
     Route::get('/kas', [KasController::class,'index'])->name('kas');
 });
