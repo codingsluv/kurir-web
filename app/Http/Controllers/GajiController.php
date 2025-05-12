@@ -7,6 +7,9 @@ use App\Models\Pengantaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Facades\Excel; // Import Facade Excel
+use App\Exports\GajiExport; // Import Class Export yang akan dibuat
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class GajiController extends Controller
 {
@@ -70,8 +73,8 @@ class GajiController extends Controller
         $data = [
             "title" => "Edit Data Gaji",
             "activeGaji" => "active",
-            'gaji'              => Gaji::with('user')->findOrFail($id), // Eager load the 'users' relationship
-            'users'             => User::where('role', 'Driver')->orderBy('name')->get(),
+            'gaji'                  => Gaji::with('user')->findOrFail($id), // Eager load the 'users' relationship
+            "users"                 => User::where('role', 'Driver')->orderBy('name')->get(),
         ];
         return view("admin.gaji.edit", $data);
     }
@@ -101,5 +104,20 @@ class GajiController extends Controller
         $gaji = Gaji::findOrFail($id);
         $gaji->delete();
         return redirect()->route('gaji')->with('success', 'Data gaji berhasil dihapus.');
+    }
+
+    public function exportGajiToExcel()
+    {
+        //Log::info('Export Excel Gaji Driver'); //Cek apakah fungsi ini terpanggil
+        return Excel::download(new GajiExport, 'gaji_driver.xlsx'); // Nama file excel
+    }
+
+     public function exportGajiToPdf()
+    {
+        $dataGaji = Gaji::with('user')->get(); // Ambil data gaji
+
+        $pdf = Pdf::loadView('exports.gaji_pdf', ['dataGaji' => $dataGaji]); // Load view dan kirim data
+
+        return $pdf->download('gaji_driver.pdf'); // Download PDF
     }
 }

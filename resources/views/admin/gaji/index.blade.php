@@ -10,11 +10,11 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="btn btn-sm btn-success">
+                <a href="{{ route('export.gaji') }}" class="btn btn-sm btn-success">
                     <i class="fas fa-file-excel mr-2"></i>
                     Exel
                 </a>
-                <a href="#" class="btn btn-sm btn-danger">
+                <a href="{{ route('export.gaji.pdf') }}" class="btn btn-sm btn-danger">
                     <i class="fas fa-file-pdf mr-2"></i>
                     PDF
                 </a>

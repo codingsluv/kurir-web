@@ -59,7 +59,11 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::get('/gaji/edit/{id}', [GajiController::class,'edit'])->name('showGaji');
     Route::put('/gaji/update/{id}', [GajiController::class,'update'])->name('updateGaji');
     Route::delete('/gaji/delete/{id}', [GajiController::class, 'destroy'])->name('deleteGaji');
+    Route::get('/export/gaji', [GajiController::class, 'exportGajiToExcel'])->name('export.gaji');
+    Route::get('/export/gaji/pdf', [GajiController::class, 'exportGajiToPdf'])->name('export.gaji.pdf');
 
     Route::get('/history', [HistoryController::class,'index'])->name('history');
+    // Route::get('/history/create', [HistoryController::class,'create'])->name('createHistory');
+
     Route::get('/kas', [KasController::class,'index'])->name('kas');
 });

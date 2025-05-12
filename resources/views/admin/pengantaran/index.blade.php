@@ -40,7 +40,9 @@
                             <td>{{ $pengantaran->nama_pemesan }}</td>
                             <td>{{ $pengantaran->no_telepon }}</td>
                             <td>{{ $pengantaran->alamat }}</td>
-                            <td class="text-right">{{ number_format($pengantaran->ongkir, 2) }}</td>
+                            <td class="text-center">
+                                <span class="badge badge-pill badge-primary">{{ number_format($pengantaran->ongkir, 2) }}</span>
+                            </td>
                             <td class="text-center">
                                 @if ($pengantaran->status === 'Menunggu')
                                     <span class="badge badge-warning badge-pill">{{ $pengantaran->status }}</span>

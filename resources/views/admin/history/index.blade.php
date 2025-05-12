@@ -14,33 +14,44 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-info text-white">
                         <tr class="text-center">
-                            <th>Nama</th>
-                            <th>Bulan</th>
-                            <th>Jmlh.Pengantaran</th>
-                            <th>Total Ongkir</th>
-                            <th>Gaji Driver</th>
-                            <th>Pendapatan Aplikasi</th>
-                            <th>
-                                <i class="fas fa-cog"></i>
-                            </th>
+                            <th>Nama Driver</th>
+                            <th>Tanggal</th>
+                            <th>Nama Pemesan</th>
+                            <th>No. Telepon</th>
+                            <th>Alamat</th>
+                            <th>Ongkir</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>Maret</td>
-                            <td>150</td>
-                            <td>50rb</td>
-                            <td>300rb</td>
-                            <td>
-                                <span class="badge badge-success">10rb</span>
-                            </td>
-
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-                            </td>
-                        </tr>
+                        @foreach ($history as $history_pengantaran)
+                            <tr>
+                                <td>{{ $history_pengantaran->user->name }}</td>
+                                <td>{{ $history_pengantaran->tanggal }}</td>
+                                <td>{{ $history_pengantaran->nama_pemesan }}</td>
+                                <td>{{ $history_pengantaran->no_telepon }}</td>
+                                <td>{{ $history_pengantaran->alamat }}</td>
+                                <td class="text-center">
+                                    <span class="badge badge-pill badge-info">{{ number_format($history_pengantaran->ongkir, 2) }}</span>
+                                </td>
+                                <td class="text-center">
+                                    @if ($history_pengantaran->status === 'Menunggu')
+                                        <span class="badge badge-warning badge-pill">{{ $history_pengantaran->status }}</span>
+                                    @elseif ($history_pengantaran->status === 'Selesai')
+                                        <span class="badge badge-success badge-pill">{{ $history_pengantaran->status }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <form action="#" method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
