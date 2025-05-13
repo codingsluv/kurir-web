@@ -13,13 +13,10 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('jumlah');
-            $table->decimal('subtotal', 10, 2);
-            $table->text('catatan')->nullable();
+        
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('cascade');
+            $table->string('pesanan');
+            $table->decimal('harga', 10, 2)->nullable();
             $table->timestamps();
         });
     }

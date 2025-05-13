@@ -8,19 +8,15 @@ class OrderDetail extends Model
 {
     protected $fillable = [
         'order_id',
-        'product_id',
-        'jumlah',
-        'subtotal',
-        'catatan',
+        'pesanan',
+        'harga',
     ];
 
-    public function pesanan()
+    /**
+     * Get the order that owns the detail.
+     */
+    public function order()
     {
-        return $this->belongsTo(Pesanan::class);
-    }
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Order::class);
     }
 }

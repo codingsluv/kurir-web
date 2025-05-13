@@ -117,7 +117,7 @@
                 </div>
 
                 <li class="nav-item {{ $activeOrder ?? '' }}">
-                    <a class="nav-link" href="{{ route('order') }}">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-truck-loading"></i>
                         <span>Orderan Masuk</span></a>
                 </li>

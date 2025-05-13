@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('attendences', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_product');
-            $table->text('deskripsi')->nullable();
-            $table->decimal('harga', 10, 2);
-            $table->string('kategori')->nullable();
-            $table->string('gambar')->nullable();
-            $table->timestamps();
+            $table->foreignId('driver_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->date('tanggal');
+            $table->enum('status', ['hadir', 'tidak_hadir', 'izin']);
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('attendences');
     }
 };

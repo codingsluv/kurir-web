@@ -18,11 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'role',
-        'aktif',
+        'username',
         'password',
+        'role',
+        'nama',
+        'no_hp',
+        'alamat',
     ];
 
     /**
@@ -48,33 +49,25 @@ class User extends Authenticatable
         ];
     }
 
-    public function driver()
+    public function attendances()
     {
-        return $this->hasOne(Driver::class);
+        return $this->hasMany(Attendence::class, 'driver_id');
     }
 
-    public function absen()
-    {
-        return $this->hasMany(Absen::class);
-    }
-
+    /**
+     * Get the orders associated with the user (driver).
+     */
     public function orders()
     {
-        return $this->hasMany(Order::class, 'user_id');
+        return $this->hasMany(Order::class, 'driver_id');
     }
 
-     public function pengantarans()
+    /**
+     * Get the salary records associated with the user (driver).
+     */
+    public function salaries()
     {
-        return $this->hasMany(Pengantaran::class, 'user_id');
+        return $this->hasMany(Salary::class, 'driver_id');
     }
 
-    public function adminOrders()
-    {
-        return $this->hasMany(Order::class, 'admin_id');
-    }
-
-    public function gajis()
-    {
-        return $this->hasMany(Gaji::class);
-    }
 }

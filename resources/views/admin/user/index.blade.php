@@ -20,7 +20,6 @@
                             <th>No.</th>
                             <th>Nama</th>
                             <th>Role</th>
-                            <th>Status</th>
                             <th>
                                 <i class="fas fa-cog"></i>
                             </th>
@@ -38,13 +37,13 @@
                                     <span class="badge badge-info">{{ $item->role }}</span>
                                 @endif
                             </td>
-                            <td class="text-center">
+                            <!-- <td class="text-center">
                                 @if ($item->Aktif == true)
                                     <span class="badge badge-success">Aktif</span>
                                 @else
                                     <span class="badge badge-danger">Tidak Aktif</span>
                                 @endif
-                            </td>
+                            </td> -->
 
                             <td>
                                 <a href="{{ route('showUser', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
