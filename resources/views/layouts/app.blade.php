@@ -26,13 +26,13 @@
 
     <div id="wrapper">
 
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-shipping-fast"></i>
+                    <img src="{{ asset('sbadmin2/img/logo.png') }}" alt="Logo" width="100">
                 </div>
-                <div class="sidebar-brand-text mx-3">Kurir</div>
+                <div class="sidebar-brand-text mx-3">BabangKurir</div>
             </a>
 
             <hr class="sidebar-divider my-0">
@@ -64,40 +64,27 @@
                 <li class="nav-item {{ $activeAbsen ?? '' }}">
                     <a class="nav-link" href="{{ route('absen') }}">
                         <i class="fas fa-user-check"></i>
-                        <span>Absen</span></a>
+                        <span>Absensi</span></a>
                 </li>
 
-                <li class="nav-item {{ $activeProduct ?? '' }}">
-                    <a class="nav-link" href="{{ route('product') }}">
-                        <i class="fas fa-utensils"></i>
-                        <span>Product</span></a>
-                </li>
 
                 <li class="nav-item {{ $activePesanan ?? '' }}">
                     <a class="nav-link" href="{{ route('pesanan') }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span>
-                            @if (Auth::check() && Auth::user()->role == 'Driver')
-                                Orderan Masuk
-                            @else
-                                Pesanan
-                            @endif
+                            Order
                         </span>
                     </a>
                 </li>
-
-                <li class="nav-item {{ $activePengantaran ?? '' }}">
-                    <a class="nav-link" href="{{ route('pengantaran') }}">
-                        <i class="fas fa-motorcycle"></i>
-                        <span>Pengantaran</span></a>
-                </li>
-
 
                 <li class="nav-item {{ $activeGaji ?? '' }}">
                     <a class="nav-link" href="{{ route('gaji') }}">
                         <i class="fas fa-money-check-alt"></i>
                         <span>Gaji Driver</span></a>
                 </li>
+
+                <hr class="sidebar-divider">
+
                 <li class="nav-item {{ $activeHistory ?? '' }}">
                     <a class="nav-link" href="{{ route('history') }}">
                         <i class="fas fa-history"></i>
@@ -173,7 +160,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('sbadmin2/img/undraw_profile.svg') }}">
                             </a>

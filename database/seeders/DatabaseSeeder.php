@@ -18,27 +18,27 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::create([
-            'name' => 'Admin',
+            'username' => 'Admin',
             'email' => 'admin@dev.com',
             'password'=> Hash::make('password'),
             'role'=> 'Admin',
-            'aktif'=> true,
+            
         ]);
 
         User::create([
-            'name' => 'Haryanto Drive',
+            'username' => 'Haryanto Drive',
             'email' => 'driver@dev.com',
             'password'=> Hash::make('password'),
             'role'=> 'Driver',
-            'aktif'=> false,
+            
         ]);
 
         User::create([
-            'name' => 'Budi Drive',
+            'username' => 'Budi Drive',
             'email' => 'budi@dev.com',
             'password'=> Hash::make('password'),
             'role'=> 'Driver',
-            'aktif'=> true,
+            
         ]);
 
     }

@@ -26,12 +26,12 @@ class UserController extends Controller
 
     public function store(Request $request) {
       $request->validate([
-        'name' => 'required',
+        'username' => 'required',
         'email' => 'required|unique:users,email',
         'role' => 'required',
         'password'=> 'required|confirmed',
       ], [
-        'name.required'=> 'Nama Tidak Boleh Kosong',
+        'username.required'=> 'Username Tidak Boleh Kosong',
         'email.required'=> 'Email Tidak Boleh Kosong',
         'email.unique'=> 'Email Sudah Ada',
         'role.required'=> 'Role Harus di Pilih',
@@ -40,11 +40,10 @@ class UserController extends Controller
       ]);
 
       $user = new User();
-      $user->name = $request->name;
+      $user->username = $request->username;
       $user->email = $request->email;
       $user->role = $request->role;
       $user->password = Hash::make($request->password);
-      $user->Aktif = false;
       $user->save();
 
       return redirect()->route('user')->with('success','User Berhasil Ditambahkan');
@@ -60,12 +59,12 @@ class UserController extends Controller
 
     public function update(Request $request, $id) {
         $request->validate([
-          'name' => 'required',
+          'username' => 'required',
           'email' => 'required|unique:users,email,' .$id,
           'role' => 'required',
           'password'=> 'nullable',
         ], [
-          'name.required'=> 'Nama Tidak Boleh Kosong',
+          'username.required'=> 'Username Tidak Boleh Kosong',
           'email.required'=> 'Email Tidak Boleh Kosong',
           'email.unique'=> 'Email Sudah Ada',
           'role.required'=> 'Role Harus di Pilih',
@@ -73,7 +72,7 @@ class UserController extends Controller
 
 
         $user = User::findOrFail($id);
-        $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
         $user->role = $request->role;
         if($request->filled('password')) {

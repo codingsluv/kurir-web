@@ -29,7 +29,7 @@
                         @foreach ($user as $item)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->username }}</td>
                             <td class="text-center">
                                 @if ($item->role == 'Admin')
                                     <span class="badge badge-dark">{{ $item->role }}</span>
@@ -45,7 +45,7 @@
                                 @endif
                             </td> -->
 
-                            <td>
+                            <td class="text-center">
                                 <a href="{{ route('showUser', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                  <!-- Tombol buka modal -->
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $item->id }}">Hapus</button>
@@ -59,7 +59,7 @@
                                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Nama: <strong>{{ $item->name }}</strong></p>
+                                        <p>Username: <strong>{{ $item->username }}</strong></p>
                                         <p>Email: <strong>{{ $item->email }}</strong></p>
                                         <p>Role: <strong>{{ $item->role }}</strong></p>
                                     </div>
