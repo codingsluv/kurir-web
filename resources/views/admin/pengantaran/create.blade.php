@@ -13,11 +13,31 @@
             <form action="{{ route('storePengantaran') }}" method="POST">
                 @csrf
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="user_id" class="form-label">
-                            <span class="text-danger">*</span> Pilih Driver:
+                    <div class="col-md-6">
+                        <label for="pesanan_id" class="form-label">
+                            <span class="text-danger">*</span> Pilih Pesanan:
                         </label>
-                        <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
+                        <select name="pesanan_id" id="pesanan_id"
+                            class="form-control @error('pesanan_id') is-invalid @enderror" required>
+                            <option selected disabled>-- Pilih Pesanan --</option>
+                            @foreach ($pesanans as $pesanan)
+                                <option value="{{ $pesanan->id }}"
+                                    {{ old('pesanan_id') == $pesanan->id ? 'selected' : '' }}>
+                                    ID: {{ $pesanan->id }} - {{ $pesanan->nama_pemesan }}
+                                    ({{ $pesanan->alamat }})
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('pesanan_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="user_id" class="form-label">
+                            Pilih Driver:
+                        </label>
+                        <select name="user_id" id="user_id"
+                            class="form-control @error('user_id') is-invalid @enderror">
                             <option selected disabled>-- Pilih Driver --</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
@@ -29,87 +49,58 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-md-4">
-                        <label for="tanggal" class="form-label">
-                            <span class="text-danger">*</span> Tanggal:
-                        </label>
-                        <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}">
-                        @error('tanggal')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-4">
-                        <label for="nama_pemesan" class="form-label">
-                            <span class="text-danger">*</span> Nama Pemesan:
-                        </label>
-                        <input type="text" name="nama_pemesan" id="nama_pemesan" class="form-control @error('nama_pemesan') is-invalid @enderror" value="{{ old('nama_pemesan') }}">
-                        @error('nama_pemesan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="no_telepon" class="form-label">
-                            <span class="text-danger">*</span> No.Telp:
+                        <label for="tanggal_pengiriman" class="form-label">
+                            Tanggal Pengiriman:
                         </label>
-                        <input type="number" name="no_telepon" id="no_telepon" class="form-control @error('no_telepon') is-invalid @enderror" value="{{ old('no_telepon') }}">
-                        @error('no_telepon')
+                        <input type="datetime-local" name="tanggal_pengiriman" id="tanggal_pengiriman"
+                            class="form-control @error('tanggal_pengiriman') is-invalid @enderror"
+                            value="{{ old('tanggal_pengiriman') }}">
+                        @error('tanggal_pengiriman')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="status" class="form-label">
+                        <label for="status_pengantaran" class="form-label">
                             <span class="text-danger">*</span> Status:
                         </label>
-                        <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
-                            <option selected disabled>-- Status Pengantaran --</option>
-                            <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                            <option value="Menunggu" {{ old('status') == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
+                        <select name="status_pengantaran" id="status_pengantaran"
+                            class="form-control @error('status_pengantaran') is-invalid @enderror" required>
+                            <option selected disabled>-- Pilih Status --</option>
+                            <option value="Menunggu" {{ old('status_pengantaran') == 'Menunggu' ? 'selected' : '' }}>Menunggu
+                            </option>
+                            <option value="Dijemput" {{ old('status_pengantaran') == 'Dijemput' ? 'selected' : '' }}>Dijemput
+                            </option>
+                            <option value="Dikirim" {{ old('status_pengantaran') == 'Dikirim' ? 'selected' : '' }}>Dikirim
+                            </option>
+                            <option value="Selesai" {{ old('status_pengantaran') == 'Selesai' ? 'selected' : '' }}>Selesai
+                            </option>
+                            <option value="Gagal" {{ old('status_pengantaran') == 'Gagal' ? 'selected' : '' }}>Gagal</option>
                         </select>
-                        @error('status')
+                        @error('status_pengantaran')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="ongkir" class="form-label">
-                            Ongkos Kirim (Rp):
+                        <label for="tarif_driver" class="form-label">
+                            Tarif Driver (Rp):
                         </label>
-                        <input type="number" step="0.01" name="ongkir" id="ongkir" class="form-control @error('ongkir') is-invalid @enderror" value="{{ old('ongkir') }}">
-                        @error('ongkir')
+                        <input type="number" name="tarif_driver" id="tarif_driver"
+                            class="form-control @error('tarif_driver') is-invalid @enderror"
+                            value="{{ old('tarif_driver') }}">
+                        @error('tarif_driver')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label for="alamat" class="form-label">
-                            <span class="text-danger">*</span> Alamat:
-                        </label>
-                        <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}">
-                        @error('alamat')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label for="catatan" class="form-label">
-                            Catatan:
-                        </label>
-                        <textarea name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror">{{ old('catatan') }}</textarea>
-                        @error('catatan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
 
                 <div class="text-end">
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-1"></i> Simpan
+                        <i class="fas fa-save me-1"></i> Simpan Pengantaran
                     </button>
                 </div>
             </form>

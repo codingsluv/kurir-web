@@ -11,7 +11,7 @@ class History extends Model
         'nama_pemesan',
         'no_telepon',
         'alamat',
-        'ongkir',
+        // 'ongkir',
         'status',
         'tanggal',
     ];

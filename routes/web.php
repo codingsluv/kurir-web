@@ -7,7 +7,10 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\KasController;
+use App\Http\Controllers\OrderanMasukController;
 use App\Http\Controllers\PengantaranController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Models\Pengantaran;
 use Illuminate\Support\Facades\Route;
@@ -46,12 +49,31 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::put('/absen/update/{id}', [AbsenController::class,'update'])->name('updateAbsen');
     Route::delete('/absen/delete/{id}', [AbsenController::class,'destroy'])->name('deleteAbsen');
 
+    // Route untuk Product
+    Route::get('/product', [ProductController::class, 'index'])->name('product');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('createProduct');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('storeProduct');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('editProduct');
+    Route::put('/product/update/{id}', [ProductController::class, 'update'])->name('updateProduct');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('deleteProduct');
+
+    
+    // Route untuk Pesanan
+    Route::get('/pesanan', [PesananController::class, 'index'])->name('pesanan');
+    Route::get('/pesanan/create', [PesananController::class, 'create'])->name('createPesanan');
+    Route::post('/pesanan/store', [PesananController::class, 'store'])->name('storePesanan');
+    Route::get('/pesanan/{id}/edit', [PesananController::class, 'edit'])->name('editPesanan');
+    Route::put('/pesanan/{id}', [PesananController::class, 'update'])->name('updatePesanan');
+    Route::delete('/pesanan/{id}', [PesananController::class, 'destroy'])->name('destroyPesanan');
+
+    //Route untuk Pengantaran
     Route::get('/pengantaran', [PengantaranController::class, 'index'])->name('pengantaran');
     Route::get('/pengantaran/create', [PengantaranController::class, 'create'])->name('createPengantaran');
-    Route::post('/pengantarn/store', [PengantaranController::class, 'store'])->name('storePengantaran');
-    Route::get('/pengantaran/edit/{id}', [PengantaranController::class,'show'])->name('showPengantaran');
-    Route::put('/pengantaran/update/{id}', [PengantaranController::class,'update'])->name('updatePengantaran');
-    Route::delete('/pengantaran/delete/{id}', [PengantaranController::class,'destroy'])->name('deletePengantaran');
+    Route::post('/pengantaran/store', [PengantaranController::class, 'store'])->name('storePengantaran');
+    Route::get('/pengantaran/{id}/edit', [PengantaranController::class, 'edit'])->name('editPengantaran');
+    Route::put('/pengantaran/{id}', [PengantaranController::class, 'update'])->name('updatePengantaran');
+    Route::delete('/pengantaran/{id}', [PengantaranController::class, 'destroy'])->name('deletePengantaran');
+
 
     Route::get('/gaji', [GajiController::class,'index'])->name('gaji');
     Route::get('/gaji/create', [GajiController::class,'create'])->name('createGaji');
@@ -66,4 +88,7 @@ Route::middleware(['checkLogin'])->group(function() {
     // Route::get('/history/create', [HistoryController::class,'create'])->name('createHistory');
 
     Route::get('/kas', [KasController::class,'index'])->name('kas');
+    Route::get('/kas/{id}', [KasController::class, 'show'])->name('kas.show');
+    Route::get('/kas/hitung', [KasController::class, 'hitungKasBulanan'])->name('kas.hitung');
+
 });

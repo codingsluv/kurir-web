@@ -11,13 +11,11 @@
 
     <title>Kurir | {{ $title }}</title>
 
-    <!-- Custom fonts for this template-->
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
     <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('sbadmin2/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -26,136 +24,135 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-        <div class="sidebar-brand-icon">
-            <i class="fas fa-shipping-fast"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Kurir</div>
-    </a>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Kurir</div>
+            </a>
 
-    <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ $menuDashboard ?? '' }}">
-        <a class="nav-link" href="/dashboard">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
+            <li class="nav-item {{ $menuDashboard ?? '' }}">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
 
-    <hr class="sidebar-divider">
+            <hr class="sidebar-divider">
 
-    <!-- Menu Admin -->
-    @if(auth()->user()->role == 'Admin') <!-- Periksa jika role adalah admin -->
-        <div class="sidebar-heading">
-            Menu Admin
-        </div>
+            @if(auth()->user()->role == 'Admin') <div class="sidebar-heading">
+                    Menu Admin
+                </div>
 
-        <!-- Nav Item - User -->
-        <li class="nav-item {{ $activeUser ?? '' }}">
-            <a class="nav-link" href="{{ route('user') }}">
-                <i class="fas fa-user"></i>
-                <span>User</span></a>
-        </li>
+                <li class="nav-item {{ $activeUser ?? '' }}">
+                    <a class="nav-link" href="{{ route('user') }}">
+                        <i class="fas fa-user"></i>
+                        <span>User</span></a>
+                </li>
 
-        <!-- Nav Item - Driver -->
-        <li class="nav-item {{ $activeDriver ?? '' }}">
-            <a class="nav-link" href="{{ route('driver') }}">
-                <i class="fas fa-users"></i>
-                <span>Driver</span></a>
-        </li>
+                <li class="nav-item {{ $activeDriver ?? '' }}">
+                    <a class="nav-link" href="{{ route('driver') }}">
+                        <i class="fas fa-users"></i>
+                        <span>Driver</span></a>
+                </li>
 
-        <!-- Nav Item - Absen -->
-        <li class="nav-item {{ $activeAbsen ?? '' }}">
-            <a class="nav-link" href="{{ route('absen') }}">
-                <i class="fas fa-user-check"></i>
-                <span>Absen</span></a>
-        </li>
-        <li class="nav-item {{ $activePengantaran ?? '' }}">
-            <a class="nav-link" href="{{ route('pengantaran') }}">
-                <i class="fas fa-motorcycle"></i>
-                <span>Pengantaran</span></a>
-        </li>
-        <li class="nav-item {{ $activeGaji ?? '' }}">
-            <a class="nav-link" href="{{ route('gaji') }}">
-                <i class="fas fa-money-check-alt"></i>
-                <span>Gaji Driver</span></a>
-        </li>
-        <li class="nav-item {{ $activeHistory ?? '' }}">
-            <a class="nav-link" href="{{ route('history') }}">
-                <i class="fas fa-history"></i>
-                <span>History</span></a>
-        </li>
-        <li class="nav-item {{ $activeKas ?? '' }}">
-            <a class="nav-link" href="kas">
-                <i class="fab fa-cc-mastercard"></i>
-                <span>Kas</span></a>
-        </li>
-    @endif
+                <li class="nav-item {{ $activeAbsen ?? '' }}">
+                    <a class="nav-link" href="{{ route('absen') }}">
+                        <i class="fas fa-user-check"></i>
+                        <span>Absen</span></a>
+                </li>
 
-    <hr class="sidebar-divider">
+                <li class="nav-item {{ $activeProduct ?? '' }}">
+                    <a class="nav-link" href="{{ route('product') }}">
+                        <i class="fas fa-utensils"></i>
+                        <span>Product</span></a>
+                </li>
 
-    <!-- Menu Driver -->
-    @if(auth()->user()->role == 'Driver') <!-- Periksa jika role adalah driver -->
-        <div class="sidebar-heading">
-            Menu Driver
-        </div>
+                <li class="nav-item {{ $activePesanan ?? '' }}">
+                    <a class="nav-link" href="{{ route('pesanan') }}">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>
+                            @if (Auth::check() && Auth::user()->role == 'Driver')
+                                Orderan Masuk
+                            @else
+                                Pesanan
+                            @endif
+                        </span>
+                    </a>
+                </li>
 
-        <!-- Nav Item - Orderan Masuk -->
-        <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-truck-loading"></i>
-                <span>Orderan Masuk</span></a>
-        </li>
+                <li class="nav-item {{ $activePengantaran ?? '' }}">
+                    <a class="nav-link" href="{{ route('pengantaran') }}">
+                        <i class="fas fa-motorcycle"></i>
+                        <span>Pengantaran</span></a>
+                </li>
 
-        <!-- Nav Item - Gaji Driver -->
-        <li class="nav-item {{ $activeGaji ?? '' }}">
-            <a class="nav-link" href="{{ route('gaji') }}">
-                <i class="fas fa-money-check-alt"></i>
-                <span>Gaji Driver</span></a>
-        </li>
-    @endif
 
-    <hr class="sidebar-divider d-none d-md-block">
+                <li class="nav-item {{ $activeGaji ?? '' }}">
+                    <a class="nav-link" href="{{ route('gaji') }}">
+                        <i class="fas fa-money-check-alt"></i>
+                        <span>Gaji Driver</span></a>
+                </li>
+                <li class="nav-item {{ $activeHistory ?? '' }}">
+                    <a class="nav-link" href="{{ route('history') }}">
+                        <i class="fas fa-history"></i>
+                        <span>History</span></a>
+                </li>
+                 <li class="nav-item {{ $activeKas ?? '' }}">
+                    <a class="nav-link" href="{{ route('kas') }}">
+                        <i class="fab fa-cc-mastercard"></i>
+                        <span>Kas</span></a>
+                </li>
+            @endif
 
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+            <hr class="sidebar-divider">
 
-</ul>
+            @if(auth()->user()->role == 'Driver') <div class="sidebar-heading">
+                    Menu Driver
+                </div>
 
-        <!-- End of Sidebar -->
+                <li class="nav-item {{ $activeOrder ?? '' }}">
+                    <a class="nav-link" href="{{ route('order') }}">
+                        <i class="fas fa-truck-loading"></i>
+                        <span>Orderan Masuk</span></a>
+                </li>
 
-        <!-- Content Wrapper -->
+                <li class="nav-item {{ $activeGaji ?? '' }}">
+                    <a class="nav-link" href="{{ route('gaji') }}">
+                        <i class="fas fa-money-check-alt"></i>
+                        <span>Gaji Driver</span></a>
+                </li>
+            @endif
+
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
@@ -173,7 +170,6 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -181,7 +177,6 @@
                                 <img class="img-profile rounded-circle"
                                     src="{{ asset('sbadmin2/img/undraw_profile.svg') }}">
                             </a>
-                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -202,20 +197,12 @@
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     @yield('content')
 
                 </div>
-                <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
+                </div>
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -223,20 +210,12 @@
                     </div>
                 </div>
             </footer>
-            <!-- End of Footer -->
-
+            </div>
         </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -256,21 +235,16 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('sbadmin2/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('sbadmin2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Core plugin JavaScript-->
     <script src="{{ asset('sbadmin2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-    <!-- Custom scripts for all pages-->
     <script src="{{ asset('sbadmin2/js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
     <script src="{{ asset('sbadmin2/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('sbadmin2/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
-    <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin2/js/demo/datatables-demo.js') }}"></script>
 
     {{-- Sweetalert --}}

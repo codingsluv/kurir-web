@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pengantaran extends Model
+class OrderDetail extends Model
 {
-    
     protected $fillable = [
-        'pesanan_id',
+        'order_id',
         'product_id',
-        'user_id',
-        'harga_satuan',
-        'status_pengantaran',
+        'jumlah',
+        'subtotal',
+        'catatan',
     ];
 
     public function pesanan()

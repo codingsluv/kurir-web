@@ -58,8 +58,19 @@ class User extends Authenticatable
         return $this->hasMany(Absen::class);
     }
 
-    public function pengantaran(){
-        return $this->hasMany(Pengantaran::class);
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
+    }
+
+     public function pengantarans()
+    {
+        return $this->hasMany(Pengantaran::class, 'user_id');
+    }
+
+    public function adminOrders()
+    {
+        return $this->hasMany(Order::class, 'admin_id');
     }
 
     public function gajis()

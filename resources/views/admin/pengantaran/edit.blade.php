@@ -70,7 +70,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <label for="ongkir" class="form-label">
                             Ongkos Kirim (Rp):
                         </label>
@@ -78,7 +78,7 @@
                         @error('ongkir')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="col-md-12">
                         <label class="form-label">
                             <span class="text-danger">*</span> Alamat:

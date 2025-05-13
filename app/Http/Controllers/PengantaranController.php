@@ -2,112 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\History;
 use App\Models\Pengantaran;
+use App\Models\Pesanan;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class PengantaranController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = array(
-            'title' => 'Data Pengantaran',
+            'title' => 'Pengantaran',
             'activePengantaran' => 'active',
-            'pengantarans' => Pengantaran::with('users')
-                ->whereHas('users', function ($query) {
-                    $query->where('role', 'driver');
-                })->latest()->get() // Menambahkan latest() agar data terbaru di atas
+            'pengantarans' => Pengantaran::all(),
+            'pesanans' => Pesanan::all(),
+            'products' => Product::all(),
+            'users' => User::where('role', 'Driver')->get()
         );
-        return view("admin.pengantaran.index", $data);
+        return view('admin.pengantaran.index', $data);
     }
 
-    public function create(){
+    public function create()
+    {
         $data = array(
-            "title"             => "Create Data Pengantaran",
-            "activePengantaran" => "active",
-            "users"             => User::where('role', 'Driver')->orderBy('name')->get(), // Menambahkan urutan nama
+            'title' => 'Tambah Pengantaran',
+            'activePengantaran' => 'active',
+            'pesanans' => Pesanan::all(),
+            'products' => Product::all(),
+            'users' => User::where('role', 'Driver')->get()
         );
-        return view("admin.pengantaran.create", $data);
+        return view('admin.pengantaran.create', $data);
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'user_id'       => 'required|exists:users,id',
-            'nama_pemesan'  => 'required',
-            'no_telepon'    => 'required',
-            'status'        => 'required',
-            'tanggal'       => 'required|date',
-            'alamat'        => 'required',
-            'ongkir'        => 'nullable|numeric|min:0',
-        ]);
-        DB::transaction(function () use ($validatedData) {
-            $pengantaran = Pengantaran::create($validatedData);
-            History::create([
-                'user_id' => $pengantaran->user_id,
-                'nama_pemesan' => $pengantaran->nama_pemesan,
-                'no_telepon' => $pengantaran->no_telepon,
-                'alamat' => $pengantaran->alamat,
-                'ongkir' => $pengantaran->ongkir,
-                'status' => $pengantaran->status,
-                'tanggal' => $pengantaran->tanggal,
-            ]);
-        });
-       return redirect()->route('pengantaran')->with('success', 'Data pengantaran berhasil ditambahkan dan disimpan ke history.');
-    }
-
-     public function show($id)
-    {
-        $data = array(
-            'title'             => 'Edit Data Pengantaran',
-            'activePengantaran' => 'active',
-            'pengantaran'       => Pengantaran::findOrFail($id),
-            'users'             => User::where('role', 'Driver')->orderBy('name')->get(), // Menambahkan urutan nama
-        );
-        return view('admin.pengantaran.edit', $data);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'tanggal'       => 'required|date', // Pastikan format tanggal sesuai
-            'nama_pemesan'  => 'required',
-            'no_telepon'    => 'required',
-            'status'        => 'required',
-            'alamat'        => 'required',
-            'ongkir'        => 'nullable|numeric|min:0', // Menambahkan validasi untuk ongkir
+        $request->validate([
+            'pesanan_id' => 'required',
+            'user_id' => 'nullable',
+            'tanggal_pengiriman' => 'required|date',
+            'status_pengantaran' => 'required|in:Menunggu,Dijemput,Dikirim,Selesai,Gagal',
+            'tarif_driver' => 'required|numeric|min:0',
         ]);
 
-        DB::transaction(function () use ($request, $id, $validatedData) {
-            $pengantaran = Pengantaran::findOrFail($id);
-            $pengantaran->update($validatedData);
+        $pengantaran = new Pengantaran();
+        $pengantaran->pesanan_id = $request->pesanan_id;
+        $pengantaran->user_id = $request->user_id;
+        $pengantaran->tanggal_pengiriman = $request->tanggal_pengiriman;
+        $pengantaran->status_pengantaran = $request->status_pengantaran;
+        $pengantaran->tarif_driver = $request->tarif_driver;
+        $pengantaran->save();
 
-            // Cari di history, jika ada, update. Jika tidak, buat baru.
-            $historyPengantaran = History::where('nama_pemesan', $pengantaran->nama_pemesan)->first();
-
-            if ($historyPengantaran) {
-                $historyPengantaran->update($validatedData);
-            } else {
-                History::create([
-                    'user_id'       => $pengantaran->user_id,
-                    'nama_pemesan'  => $validatedData['nama_pemesan'],
-                    'no_telepon'    => $validatedData['no_telepon'],
-                    'alamat'        => $validatedData['alamat'],
-                    'ongkir'        => $validatedData['ongkir'],
-                    'status'        => $validatedData['status'],
-                    'tanggal'       => $validatedData['tanggal'],
-                ]);
-            }
-        });
-
-        return redirect()->route('pengantaran')->with('success', 'Data Berhasil Diupdate');
-    }
-
-    public function destroy($id){
-        $pengantaran = Pengantaran::findOrFail($id);
-        $pengantaran->delete();
-        return redirect()->route('pengantaran')->with('success','Data Berhasil Dihapus');
+        return redirect()->route('pengantaran')->with('success', 'Pengantaran berhasil ditambahkan');
     }
 }

@@ -11,11 +11,15 @@
             <div>
                 <a href="#" class="btn btn-sm btn-success">
                     <i class="fas fa-file-excel mr-2"></i>
-                    Exel
+                    Excel
                 </a>
                 <a href="#" class="btn btn-sm btn-danger">
                     <i class="fas fa-file-pdf mr-2"></i>
                     PDF
+                </a>
+                <a href="{{ route('kas.hitung') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-calculator mr-2"></i>
+                    Hitung Kas Bulanan
                 </a>
             </div>
         </div>
@@ -26,25 +30,32 @@
                         <tr class="text-center">
                             <th>Bulan</th>
                             <th>Total Ongkir</th>
-                            <th>Kas Nasuk</th>
-                            <th>
-                                <i class="fas fa-cog"></i>
-                            </th>
+                            <th>Kas Masuk</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Maret</td>
-                            <td>120rb</td>
-                            <td>20rb</td>
-
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
-                            </td>
-                        </tr>
+                        @forelse ($kasBulanan as $kas)
+                            <tr>
+                                <td>{{ $kas->bulan }}</td>
+                                <td>Rp. {{ number_format($kas->total_ongkir, 0, ',', '.') }}</td>
+                                <td>Rp. {{ number_format($kas->total_kas_masuk, 0, ',', '.') }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('kas.show', $kas->id) }}" class="btn btn-sm btn-primary">Detail</a>
+                                    <a href="#" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">Tidak ada data kas.</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="mt-3">
+                {{ $kasBulanan->links() }}
             </div>
         </div>
     </div>
