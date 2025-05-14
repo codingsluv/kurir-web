@@ -56,20 +56,20 @@
                 </li>
 
                 <li class="nav-item {{ $activeDriver ?? '' }}">
-                    <a class="nav-link" href="{{ route('driver') }}">
+                    <a class="nav-link" href="{{ route('driver.index') }}">
                         <i class="fas fa-users"></i>
                         <span>Driver</span></a>
                 </li>
 
-                <li class="nav-item {{ $activeAbsen ?? '' }}">
-                    <a class="nav-link" href="{{ route('absen') }}">
+                <li class="nav-item {{ $activeAbsensi ?? '' }}">
+                    <a class="nav-link" href="{{ route('admin.absensi.index') }}">
                         <i class="fas fa-user-check"></i>
                         <span>Absensi</span></a>
                 </li>
 
 
                 <li class="nav-item {{ $activePesanan ?? '' }}">
-                    <a class="nav-link" href="{{ route('pesanan') }}">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-shopping-cart"></i>
                         <span>
                             Order
@@ -78,7 +78,7 @@
                 </li>
 
                 <li class="nav-item {{ $activeGaji ?? '' }}">
-                    <a class="nav-link" href="{{ route('gaji') }}">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-money-check-alt"></i>
                         <span>Gaji Driver</span></a>
                 </li>
@@ -86,12 +86,12 @@
                 <hr class="sidebar-divider">
 
                 <li class="nav-item {{ $activeHistory ?? '' }}">
-                    <a class="nav-link" href="{{ route('history') }}">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-history"></i>
                         <span>History</span></a>
                 </li>
                  <li class="nav-item {{ $activeKas ?? '' }}">
-                    <a class="nav-link" href="{{ route('kas') }}">
+                    <a class="nav-link" href="#">
                         <i class="fab fa-cc-mastercard"></i>
                         <span>Kas</span></a>
                 </li>
@@ -109,8 +109,8 @@
                         <span>Orderan Masuk</span></a>
                 </li>
 
-                <li class="nav-item {{ $activeGaji ?? '' }}">
-                    <a class="nav-link" href="{{ route('gaji') }}">
+                <li class="nav-item {{ $activeGaji ?? '' }}+">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-money-check-alt"></i>
                         <span>Gaji Driver</span></a>
                 </li>

@@ -20,6 +20,7 @@ class UserController extends Controller
     public function create() {
         $data = array(
             "title"=> "Create User",
+            "activeUser"=> "active",
         );
         return view("admin.user.create", $data);
     }
@@ -30,6 +31,9 @@ class UserController extends Controller
         'email' => 'required|unique:users,email',
         'role' => 'required',
         'password'=> 'required|confirmed',
+        'nama' => 'required',
+        'no_hp' => 'required|unique:users,no_hp',
+        'alamat' => 'required',
       ], [
         'username.required'=> 'Username Tidak Boleh Kosong',
         'email.required'=> 'Email Tidak Boleh Kosong',
@@ -44,8 +48,10 @@ class UserController extends Controller
       $user->email = $request->email;
       $user->role = $request->role;
       $user->password = Hash::make($request->password);
+      $user->nama = $request->nama;
+      $user->no_hp = $request->no_hp;
+      $user->alamat = $request->alamat;
       $user->save();
-
       return redirect()->route('user')->with('success','User Berhasil Ditambahkan');
     }
 
@@ -63,6 +69,9 @@ class UserController extends Controller
           'email' => 'required|unique:users,email,' .$id,
           'role' => 'required',
           'password'=> 'nullable',
+          'nama' => 'required',
+          'no_hp' => 'required|unique:users,no_hp,' .$id,
+          'alamat' => 'required',
         ], [
           'username.required'=> 'Username Tidak Boleh Kosong',
           'email.required'=> 'Email Tidak Boleh Kosong',
@@ -75,6 +84,9 @@ class UserController extends Controller
         $user->username = $request->username;
         $user->email = $request->email;
         $user->role = $request->role;
+        $user->nama = $request->nama;
+        $user->no_hp = $request->no_hp;
+        $user->alamat = $request->alamat;
         if($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }

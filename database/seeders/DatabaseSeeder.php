@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@dev.com',
             'password'=> Hash::make('password'),
             'role'=> 'Admin',
-            
+            'nama' => 'Admin',
+            'no_hp' => '081234567890',
+            'alamat' => 'Jl. Admin',
         ]);
 
         User::create([
@@ -30,7 +32,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'driver@dev.com',
             'password'=> Hash::make('password'),
             'role'=> 'Driver',
-            
+            'nama' => 'Haryanto Drive',
+            'no_hp' => '081390420435',
+            'alamat' => 'Jl. Haryanto Drive',
         ]);
 
         User::create([
@@ -38,7 +42,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'budi@dev.com',
             'password'=> Hash::make('password'),
             'role'=> 'Driver',
-            
+            'nama' => 'Budi Drive',
+            'no_hp' => '081234293854',
+            'alamat' => 'Jl. Budi Drive',
         ]);
 
     }

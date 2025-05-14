@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->enum('status', ['hadir', 'tidak_hadir', 'izin']);
             $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
         });
     }
 

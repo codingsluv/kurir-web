@@ -17,18 +17,60 @@
                     <div class="col-xl-6">
                         <label class="form-label">
                             <span class="text-danger">*</span>
-                            Nama :
+                            Username :
                         </label>
-                        <input type="text" name="name" class="form-control @error('name')
+                        <input type="text" name="username" class="form-control @error('username')
                             is-invalid
                         @enderror">
-                        @error('name')
+                        @error('username')
                             <small class="text-danger">
                                 {{ $message }}
                             </small>
                         @enderror
                     </div>
-                    <div class="col-xl-6 mb-1">
+                    <div class="col-xl-6">
+                        <label class="form-label">
+                            <span class="text-danger">*</span>
+                            Nama Driver :
+                        </label>
+                        <input type="text" name="nama" class="form-control @error('nama')
+                            is-invalid
+                        @enderror">
+                        @error('nama')
+                            <small class="text-danger">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
+                    <div class="col-xl-6">
+                        <label class="form-label">
+                            <span class="text-danger">*</span>
+                            No HP :
+                        </label>
+                        <input type="text" name="no_hp" class="form-control @error('no_hp')
+                            is-invalid
+                        @enderror">
+                        @error('no_hp')
+                            <small class="text-danger">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
+                    <div class="col-xl-6">
+                        <label class="form-label">
+                            <span class="text-danger">*</span>
+                            Alamat :
+                        </label>
+                        <input type="text" name="alamat" class="form-control @error('alamat')
+                            is-invalid
+                        @enderror">
+                        @error('alamat')
+                            <small class="text-danger">
+                                {{ $message }}
+                            </small>
+                        @enderror
+                    </div>
+                    <div class="col-xl-12 mb-1">
                         <label class="form-label">
                             <span class="text-danger">*</span>
                             Email :
