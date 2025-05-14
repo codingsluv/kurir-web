@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\DriverController as AdminDriverController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
@@ -36,6 +37,9 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::get('/today', [AbsensiController::class, 'todayAttendance'])->name('admin.absensi.today'); // Ubah '/today-attendance' menjadi '/today'
     Route::get('/harian', [AbsensiController::class, 'dailyReport'])->name('admin.absensi.harian');
     Route::get('/bulanan', [AbsensiController::class, 'monthlyReport'])->name('admin.absensi.bulanan');
+
+
+    Route::resource('order', OrderController::class);
 
     
 });

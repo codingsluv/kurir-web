@@ -68,11 +68,11 @@
                 </li>
 
 
-                <li class="nav-item {{ $activePesanan ?? '' }}">
-                    <a class="nav-link" href="#">
+                <li class="nav-item {{ $activeOrder ?? '' }}">
+                    <a class="nav-link" href="{{ route('order.index') }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span>
-                            Order
+                            Kirim Order
                         </span>
                     </a>
                 </li>
