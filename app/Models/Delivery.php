@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
 {
+    protected $table = 'deliveries';
     protected $fillable = [
         'order_id',
         'total_ongkir',
         'jenis_pembayaran',
         'bukti_transfer',
-        'status',
-        'completed_at',
+        'status_pengantaran',
     ];
-
     /**
      * Get the order associated with the delivery.
      */

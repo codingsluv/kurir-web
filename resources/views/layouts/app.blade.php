@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Kurir | {{ $title }}</title>
+    <title>BabangKurir | {{ $title }}</title>
 
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -28,99 +28,103 @@
 
         <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
-                <div class="sidebar-brand-icon">
-                    <img src="{{ asset('sbadmin2/img/logo.png') }}" alt="Logo" width="100">
-                </div>
-                <div class="sidebar-brand-text mx-3">BabangKurir</div>
+        <!-- Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+            <div class="sidebar-brand-icon">
+                <img src="{{ asset('sbadmin2/img/logo.png') }}" alt="Logo" width="100">
+            </div>
+            <div class="sidebar-brand-text mx-3">BabangKurir</div>
+        </a>
+
+        <hr class="sidebar-divider my-0">
+
+        <!-- Dashboard -->
+        <li class="nav-item {{ $menuDashboard ?? '' }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
             </a>
+        </li>
 
-            <hr class="sidebar-divider my-0">
+        <hr class="sidebar-divider">
 
-            <li class="nav-item {{ $menuDashboard ?? '' }}">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+        @if(auth()->user()->role === 'Admin')
+            <div class="sidebar-heading">Menu Admin</div>
+
+            <li class="nav-item {{ $activeUser ?? '' }}">
+                <a class="nav-link" href="{{ route('user') }}">
+                    <i class="fas fa-user"></i>
+                    <span>User</span>
+                </a>
             </li>
 
-            <hr class="sidebar-divider">
+            <li class="nav-item {{ $activeDriver ?? '' }}">
+                <a class="nav-link" href="{{ route('driver.index') }}">
+                    <i class="fas fa-users"></i>
+                    <span>Driver</span>
+                </a>
+            </li>
 
-            @if(auth()->user()->role == 'Admin') <div class="sidebar-heading">
-                    Menu Admin
-                </div>
+            <li class="nav-item {{ $activeAbsensi ?? '' }}">
+                <a class="nav-link" href="{{ route('admin.absensi.index') }}">
+                    <i class="fas fa-user-check"></i>
+                    <span>Absensi</span>
+                </a>
+            </li>
 
-                <li class="nav-item {{ $activeUser ?? '' }}">
-                    <a class="nav-link" href="{{ route('user') }}">
-                        <i class="fas fa-user"></i>
-                        <span>User</span></a>
-                </li>
+            <li class="nav-item {{ $activeOrder ?? '' }}">
+                <a class="nav-link" href="{{ route('order.index') }}">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Kirim Order</span>
+                </a>
+            </li>
 
-                <li class="nav-item {{ $activeDriver ?? '' }}">
-                    <a class="nav-link" href="{{ route('driver.index') }}">
-                        <i class="fas fa-users"></i>
-                        <span>Driver</span></a>
-                </li>
+            <li class="nav-item {{ $activeGaji ?? '' }}">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-money-check-alt"></i>
+                    <span>Gaji Driver</span>
+                </a>
+            </li>
 
-                <li class="nav-item {{ $activeAbsensi ?? '' }}">
-                    <a class="nav-link" href="{{ route('admin.absensi.index') }}">
-                        <i class="fas fa-user-check"></i>
-                        <span>Absensi</span></a>
-                </li>
+            <li class="nav-item {{ $activeHistory ?? '' }}">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+            </li>
 
+            <li class="nav-item {{ $activeKas ?? '' }}">
+                <a class="nav-link" href="#">
+                    <i class="fab fa-cc-mastercard"></i>
+                    <span>Kas</span>
+                </a>
+            </li>
+        @endif
 
-                <li class="nav-item {{ $activeOrder ?? '' }}">
-                    <a class="nav-link" href="{{ route('order.index') }}">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>
-                            Kirim Order
-                        </span>
-                    </a>
-                </li>
+        @if(auth()->user()->role === 'Driver')
+            <div class="sidebar-heading">Menu Driver</div>
 
-                <li class="nav-item {{ $activeGaji ?? '' }}">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-money-check-alt"></i>
-                        <span>Gaji Driver</span></a>
-                </li>
+            <li class="nav-item {{ $activeOrder ?? '' }}">
+                <a class="nav-link" href="{{ route('order.index') }}">
+                    <i class="fas fa-truck-loading"></i>
+                    <span>Orderan Masuk</span>
+                </a>
+            </li>
 
-                <hr class="sidebar-divider">
+            <li class="nav-item {{ $activeGaji ?? '' }}">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-money-check-alt"></i>
+                    <span>Gaji Driver</span>
+                </a>
+            </li>
+        @endif
 
-                <li class="nav-item {{ $activeHistory ?? '' }}">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-history"></i>
-                        <span>History</span></a>
-                </li>
-                 <li class="nav-item {{ $activeKas ?? '' }}">
-                    <a class="nav-link" href="#">
-                        <i class="fab fa-cc-mastercard"></i>
-                        <span>Kas</span></a>
-                </li>
-            @endif
+        <hr class="sidebar-divider d-none d-md-block">
 
-            <hr class="sidebar-divider">
-
-            @if(auth()->user()->role == 'Driver') <div class="sidebar-heading">
-                    Menu Driver
-                </div>
-
-                <li class="nav-item {{ $activeOrder ?? '' }}">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-truck-loading"></i>
-                        <span>Orderan Masuk</span></a>
-                </li>
-
-                <li class="nav-item {{ $activeGaji ?? '' }}+">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-money-check-alt"></i>
-                        <span>Gaji Driver</span></a>
-                </li>
-            @endif
-
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+        <!-- Sidebar Toggler -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">

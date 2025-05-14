@@ -45,9 +45,35 @@
                                 <a href="{{ route('order.edit', $order->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('order.destroy', $order->id) }}" class="btn btn-sm btn-danger">
+
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $order->id }}">
                                     <i class="fas fa-trash"></i>
-                                </a>
+                                </button>
+
+                                <!-- Modal per user -->
+                                <div class="modal fade" id="modalDelete{{ $order->id }}" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel{{ $order->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header bg-danger text-white">
+                                        <h5 class="modal-title">Hapus Data User?</h5>
+                                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Nama Pemesan: <strong>{{ $order->nama_pemesan }}</strong></p>
+                                        <p>No HP Pemesan: <strong>{{ $order->no_hp_pemesan }}</strong></p>
+                                        <p>Alamat Pengantaran: <strong>{{ $order->alamat_pengantaran }}</strong></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ route('order.destroy', $order->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

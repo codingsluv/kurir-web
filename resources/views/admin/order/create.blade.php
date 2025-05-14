@@ -66,21 +66,12 @@
                 <h5>Detail Pesanan</h5>
                 <div id="detail-container">
                     <div class="row mb-2">
-                        <div class="col-xl-8">
+                        <div class="col-xl-12">
                             <label class="form-label">
                                 <span class="text-danger">*</span> Pesanan :
                             </label>
                             <input type="text" name="pesanan[]" class="form-control @error('pesanan.0') is-invalid @enderror">
-                            @error('pesanan.0')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-xl-4">
-                            <label class="form-label">
-                                <span class="text-danger">*</span> Harga :
-                            </label>
-                            <input type="number" step="0.01" name="harga[]" class="form-control @error('harga.0') is-invalid @enderror">
-                            @error('harga.0')
+                            @error('pesanan')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
@@ -102,24 +93,5 @@
         </div>
     </div>
 
-    <script>
-        function addDetail() {
-            const container = document.getElementById('detail-container');
-            const index = container.children.length;
-
-            const row = document.createElement('div');
-            row.classList.add('row', 'mb-2');
-
-            row.innerHTML = `
-                <div class="col-xl-8">
-                    <input type="text" name="pesanan[]" class="form-control" placeholder="Pesanan ke-${index + 1}">
-                </div>
-                <div class="col-xl-4">
-                    <input type="number" step="0.01" name="harga[]" class="form-control" placeholder="Harga">
-                </div>
-            `;
-
-            container.appendChild(row);
-        }
-    </script>
+    
 @endsection

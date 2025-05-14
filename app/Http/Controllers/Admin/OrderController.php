@@ -3,23 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $data = [
-            'title' => 'Order',
-            'activeOrder' => 'active',
-            'user' => User::where('role', 'driver')->get(),
-            'orders' => Order::with('orderDetails')->get(),
-        ];
+        $user = Auth::user();
 
-        return view('admin.order.index', $data);
+        $orders = Order::with('orderDetails');
+
+        if ($user->role === 'Driver') {
+            // Khusus driver, hanya tampilkan order miliknya yang masih menunggu
+            $orders = $orders->where('driver_id', $user->id)
+                             ->where('status', 'Menunggu')
+                             ->whereDoesntHave('delivery')
+                             ->get();
+            
+            return view('driver.deliveries.index', [
+                'title' => 'Orderan Masuk',
+                'activeOrder' => 'active',
+                'orders' => $orders,
+            ]);
+        } else if ($user->role === 'Admin') {
+            // Untuk admin, tampilkan semua order
+            $orders = $orders->get();
+            return view('admin.order.index', [
+                'title' => 'Order',
+                'activeOrder' => 'active',
+                'user' => User::where('role', 'driver')->get(),
+                'orders' => $orders,
+            ]);
+        }
     }
 
     public function create()
@@ -33,6 +54,12 @@ class OrderController extends Controller
         return view('admin.order.create', $data);
     }
 
+    public function show($id)
+    {
+        $order = Order::with('orderDetails')->findOrFail($id);
+        return view('admin.order.show', compact('order'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -41,7 +68,6 @@ class OrderController extends Controller
             'no_hp_pemesan' => 'required',
             'driver_id' => 'nullable|exists:users,id',
             'pesanan.*' => 'required|string',
-            'harga.*' => 'required|numeric',
         ]);
 
         $order = new Order();
@@ -56,7 +82,6 @@ class OrderController extends Controller
             OrderDetail::create([
                 'order_id' => $order->id,
                 'pesanan' => $pesanan,
-                'harga' => $request->harga[$key],
             ]);
         }
 
@@ -86,7 +111,6 @@ class OrderController extends Controller
             'no_hp_pemesan' => 'required',
             'driver_id' => 'nullable|exists:users,id',
             'pesanan.*' => 'required|string',
-            'harga.*' => 'required|numeric',
         ]);
     
         // Ambil data order berdasarkan ID
@@ -106,7 +130,6 @@ class OrderController extends Controller
             OrderDetail::create([
                 'order_id' => $order->id,
                 'pesanan' => $pesanan,
-                'harga' => $request->harga[$key],
             ]);
         }
     
@@ -120,4 +143,7 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->route('order.index')->with('success', 'Order berhasil dihapus.');
     }
+
+
+
 }

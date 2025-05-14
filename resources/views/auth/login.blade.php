@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>KurirApp - Login</title>
+    <title>BabangKurir - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -39,8 +39,8 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">
-                                            <i class="fas fa-shipping-fast mr-2"></i>
-                                            KurirApp  Login
+                                            <img src="{{ asset('sbadmin2/img/logo.png') }}" alt="Logo" style="width: 100px; height: 100px;">
+                                            Babang Kurir
                                         </h1>
                                     </div>
                                     <form class="user" method="POST" action="{{ route('loginProcess') }}">

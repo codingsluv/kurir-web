@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\Driver\DelivieryController;
 use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::middleware(['checkLogin'])->group(function() {
 
 
     Route::resource('order', OrderController::class);
+    Route::get('/order/masuk', [OrderController::class, 'orderMasuk'])->name('order.masuk');
+    Route::get('/order/complete', [OrderController::class, 'complete'])->name('order.complete');
 
-    
+    Route::get('/driver/deliveries', [DelivieryController::class, 'index'])->name('driver.deliveries.index');
+    Route::get('/driver/deliveries/{order}', [DelivieryController::class, 'show'])->name('driver.deliveries.show');
+    Route::put('/driver/deliveries/{order}', [DelivieryController::class, 'update'])->name('driver.deliveries.update');
 });
