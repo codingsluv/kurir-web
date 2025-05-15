@@ -39,7 +39,7 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Dashboard -->
-        <li class="nav-item {{ $menuDashboard ?? '' }}">
+        <li class="nav-item {{ $activeDashboard ?? '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
@@ -198,7 +198,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; BabangKurir 2025</span>
                     </div>
                 </div>
             </footer>
