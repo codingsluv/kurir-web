@@ -47,4 +47,5 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::get('/driver/deliveries', [DelivieryController::class, 'index'])->name('driver.deliveries.index');
     Route::get('/driver/deliveries/{order}', [DelivieryController::class, 'show'])->name('driver.deliveries.show');
     Route::put('/driver/deliveries/{order}', [DelivieryController::class, 'update'])->name('driver.deliveries.update');
+    Route::get('/admin/deliveries/history', [DelivieryController::class, 'history'])->name('admin.deliveries.history');
 });

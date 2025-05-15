@@ -87,7 +87,7 @@
             </li>
 
             <li class="nav-item {{ $activeHistory ?? '' }}">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('admin.deliveries.history') }}">
                     <i class="fas fa-history"></i>
                     <span>History</span>
                 </a>
@@ -114,7 +114,7 @@
             <li class="nav-item {{ $activeGaji ?? '' }}">
                 <a class="nav-link" href="#">
                     <i class="fas fa-money-check-alt"></i>
-                    <span>Gaji Driver</span>
+                    <span>Pendapatan Driver</span>
                 </a>
             </li>
         @endif

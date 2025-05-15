@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('driver_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->date('tanggal');
             $table->enum('status', ['hadir', 'tidak_hadir', 'izin']);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->useCurrentOnUpdate();
+            $table->timestamps();
         });
     }
 

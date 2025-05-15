@@ -115,4 +115,17 @@ class DelivieryController extends Controller
             return back()->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()])->withInput();
         }
     }
+
+    public function history()
+    {
+        $data = [
+            'title' => 'Riwayat Pengantaran',
+            'activeHistory'=> 'active',
+            'deliveries' => Order::where('status', 'Selesai') // Ambil order dengan status 'Selesai'
+                ->with('driver') // Eager load data driver
+                ->get(),
+        ];
+
+        return view('admin.deliveries.history', $data);
+    }
 }
