@@ -4,6 +4,38 @@
     <h1>{{ $title }}</h1>
 
     <div class="card">
+        <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
+            <div class="mb-1 mr-2">
+            <form method="GET" action="{{ route('export.absensi.excel') }}" style="display: inline-block;">
+                @if(isset($today))
+                    <input type="hidden" name="tanggal" value="{{ $today }}">
+                @elseif(isset($report_date))
+                     <input type="hidden" name="tanggal" value="{{ $report_date }}">
+                @elseif (isset($month) && isset($year))
+                    <input type="hidden" name="bulan" value="{{ $month }}">
+                    <input type="hidden" name="tahun" value="{{ $year }}">
+                @endif
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-file-excel"></i>
+                    Excel
+                </button>
+            </form>
+            <form method="GET" action="{{ route('export.absensi.pdf') }}" style="display: inline-block; margin-left: 10px;">
+                 @if(isset($today))
+                    <input type="hidden" name="tanggal" value="{{ $today }}">
+                 @elseif(isset($report_date))
+                     <input type="hidden" name="tanggal" value="{{ $report_date }}">
+                @elseif (isset($month) && isset($year))
+                    <input type="hidden" name="bulan" value="{{ $month }}">
+                    <input type="hidden" name="tahun" value="{{ $year }}">
+                @endif
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-file-pdf"></i>
+                    PDF
+                </button>
+            </form>
+            </div>
+        </div>
         <div class="card-body">
             <form action="{{ route('admin.absensi.bulanan') }}" method="GET" class="mb-3">
                 <div class="form-group">
@@ -26,7 +58,7 @@
             </form>
 
             @if ($attendances->isNotEmpty())
-                <table class="table table-bordered">
+                <table class="table table-bordered ">
                     <thead>
                         <tr>
                             <th>Nama Driver</th>
@@ -38,7 +70,7 @@
                             <th class="text-center">Total Izin</th> {{-- Tambahkan total izin --}}
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table">
                         @foreach ($attendances as $driverId => $driverAttendances)
                             <tr>
                                 <td>{{ $driverAttendances->first()->driver->nama }}</td> {{-- Sesuaikan nama relasi --}}

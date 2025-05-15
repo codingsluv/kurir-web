@@ -7,6 +7,22 @@
         </h1>
 
         <div class="card shadow mb-4">
+            <div class="card-header d-flex flex-wrap justify-content-center justify-content-xl-between">
+                <div class="d-flex justify-content-end mb-4">
+                    <form method="GET" action="{{ route('export.order.excel') }}" style="display: inline-block;">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i>
+                            Excel
+                        </button>
+                    </form>
+                    <form method="GET" action="{{ route('export.order.pdf') }}" style="display: inline-block; margin-left: 10px;">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-file-pdf"></i>
+                            PDF
+                        </button>
+                    </form>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

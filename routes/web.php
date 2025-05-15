@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
 use App\Http\Controllers\Driver\DelivieryController;
+use App\Http\Controllers\Eksports\ExportController;
 use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,9 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::get('/admin/pendapatan', [DelivieryController::class, 'pendapatan'])->name('admin.pendapatan');
     Route::get('/admin/gaji-driver', [DelivieryController::class, 'gajiDriver'])->name('admin.gaji_driver');
     Route::get('/pendapatan', [DelivieryController::class, 'pendapatanDriver'])->name('driver.pendapatan');
+
+    Route::get('export/absensi/excel', [ExportController::class, 'exportAbsensiExcel'])->name('export.absensi.excel');
+Route::get('export/absensi/pdf', [ExportController::class, 'exportAbsensiPdf'])->name('export.absensi.pdf');
+Route::get('export/order/excel', [ExportController::class, 'exportOrderExcel'])->name('export.order.excel');
+Route::get('export/order/pdf', [ExportController::class, 'exportOrderPdf'])->name('export.order.pdf');
 });
