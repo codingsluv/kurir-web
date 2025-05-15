@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -127,5 +128,69 @@ class DelivieryController extends Controller
         ];
 
         return view('admin.deliveries.history', $data);
+    }
+
+    public function pendapatan()
+    {
+        // Hitung total pendapatan dari ongkir
+        $totalPendapatan = Order::where('status', 'Selesai')
+            ->join('deliveries', 'orders.id', '=', 'deliveries.order_id')
+            ->sum('deliveries.total_ongkir');
+
+        $data = [
+            'title' => 'Informasi Pendapatan Babang',
+            'activePendapatan' => 'active',
+            'total_pendapatan' => $totalPendapatan,
+        ];
+
+        return view('admin.pendapatan.index', $data);
+    }
+
+    public function gajiDriver()
+    {
+        // Ambil semua driver
+        $drivers = User::where('role', 'Driver')->get();
+
+        // Hitung gaji masing-masing driver
+        $gajiDrivers = [];
+        foreach ($drivers as $driver) {
+            $totalOngkirDriver = Order::where('status', 'Selesai')
+                ->where('driver_id', $driver->id)
+                ->join('deliveries', 'orders.id', '=', 'deliveries.order_id')
+                ->sum('deliveries.total_ongkir');
+            $gajiDriver = $totalOngkirDriver * 0.7; // 70% untuk driver
+            $gajiDrivers[] = [
+                'driver' => $driver,
+                'total_ongkir_driver' => $totalOngkirDriver,
+                'gaji_driver' => $gajiDriver,
+            ];
+        }
+
+        $data = [
+            'title' => 'Gaji Driver',
+            'activeGaji' => 'active',
+            'gaji_drivers' => $gajiDrivers,
+        ];
+
+        return view('admin.gaji.index', $data);
+    }
+
+    public function pendapatanDriver() {
+        $driverId = Auth::id();
+        $totalOngkirDriver = Order::where('status', 'Selesai')
+            ->where('driver_id', $driverId)
+            ->join('deliveries', 'orders.id', '=', 'deliveries.order_id')
+            ->sum('deliveries.total_ongkir');
+
+        $gajiDriver = $totalOngkirDriver * 0.7;
+
+        $data = [
+            'title' => 'Pendapatan Driver',
+            'activePendapatanDriver' => 'active',
+            'total_ongkir_driver' => $totalOngkirDriver,
+            'gaji_driver' => $gajiDriver,
+        ];
+
+        return view('admin.pendapatanDriver.index', $data);
     }
 }

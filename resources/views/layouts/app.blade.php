@@ -80,23 +80,24 @@
             </li>
 
             <li class="nav-item {{ $activeGaji ?? '' }}">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('admin.gaji_driver') }}">
                     <i class="fas fa-money-check-alt"></i>
                     <span>Gaji Driver</span>
                 </a>
             </li>
 
+            <li class="nav-item {{ $activePendapatan ?? '' }}">
+                <a class="nav-link" href="{{ route('admin.pendapatan') }}">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Pendapatan Babang</span>
+                </a>
+            </li>
+            
+
             <li class="nav-item {{ $activeHistory ?? '' }}">
                 <a class="nav-link" href="{{ route('admin.deliveries.history') }}">
                     <i class="fas fa-history"></i>
                     <span>History</span>
-                </a>
-            </li>
-
-            <li class="nav-item {{ $activeKas ?? '' }}">
-                <a class="nav-link" href="#">
-                    <i class="fab fa-cc-mastercard"></i>
-                    <span>Kas</span>
                 </a>
             </li>
         @endif
@@ -111,8 +112,8 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ $activeGaji ?? '' }}">
-                <a class="nav-link" href="#">
+            <li class="nav-item {{ $activePendapatanDriver ?? '' }}">
+                <a class="nav-link" href="{{ route('driver.pendapatan') }}">
                     <i class="fas fa-money-check-alt"></i>
                     <span>Pendapatan Driver</span>
                 </a>

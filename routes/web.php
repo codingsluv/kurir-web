@@ -48,4 +48,7 @@ Route::middleware(['checkLogin'])->group(function() {
     Route::get('/driver/deliveries/{order}', [DelivieryController::class, 'show'])->name('driver.deliveries.show');
     Route::put('/driver/deliveries/{order}', [DelivieryController::class, 'update'])->name('driver.deliveries.update');
     Route::get('/admin/deliveries/history', [DelivieryController::class, 'history'])->name('admin.deliveries.history');
+    Route::get('/admin/pendapatan', [DelivieryController::class, 'pendapatan'])->name('admin.pendapatan');
+    Route::get('/admin/gaji-driver', [DelivieryController::class, 'gajiDriver'])->name('admin.gaji_driver');
+    Route::get('/pendapatan', [DelivieryController::class, 'pendapatanDriver'])->name('driver.pendapatan');
 });

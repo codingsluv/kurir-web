@@ -49,7 +49,7 @@
                                 @endphp
                                 @for ($i = 1; $i <= \Carbon\Carbon::create($year, $month, 1)->daysInMonth; $i++)
                                     @php
-                                        $attendance = $driverAttendances->firstWhere('tanggal', \Carbon\Carbon::create($year, $month, $i)->toDateString()); {{-- Sesuaikan nama kolom --}}
+                                        $attendance = $driverAttendances->firstWhere('tanggal', \Carbon\Carbon::create($year, $month, $i)->toDateString());
                                     @endphp
                                     <td class="text-center">
                                         @if ($attendance)
