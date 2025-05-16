@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BabangKurir | {{ $title }}</title>
+    <title>Antar.In | {{ $title }}</title>
 
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -31,9 +31,9 @@
         <!-- Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
             <div class="sidebar-brand-icon">
-                <img src="{{ asset('sbadmin2/img/logo.png') }}" alt="Logo" width="100">
+                <!-- <img src="{{ asset('sbadmin2/img/logo.png') }}" alt="Logo" width="100"> -->
             </div>
-            <div class="sidebar-brand-text mx-3">BabangKurir</div>
+            <div class="sidebar-brand-text mx-3">AntarIn</div>
         </a>
 
         <hr class="sidebar-divider my-0">
@@ -89,7 +89,7 @@
             <li class="nav-item {{ $activePendapatan ?? '' }}">
                 <a class="nav-link" href="{{ route('admin.pendapatan') }}">
                     <i class="fas fa-money-bill-wave"></i>
-                    <span>Pendapatan Babang</span>
+                    <span>Pendapatan Aplikasi</span>
                 </a>
             </li>
             
@@ -198,7 +198,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; BabangKurir 2025</span>
+                        <span>Copyright &copy; Antar.In 2025</span>
                     </div>
                 </div>
             </footer>

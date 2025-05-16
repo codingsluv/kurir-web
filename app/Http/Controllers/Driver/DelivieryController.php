@@ -138,7 +138,7 @@ class DelivieryController extends Controller
             ->sum('deliveries.total_ongkir');
 
         $data = [
-            'title' => 'Informasi Pendapatan Babang',
+            'title' => 'Informasi Pendapatan Aplikasi',
             'activePendapatan' => 'active',
             'total_pendapatan' => $totalPendapatan,
         ];
